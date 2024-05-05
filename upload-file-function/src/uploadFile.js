@@ -3,7 +3,15 @@ const { Storage } = require("@google-cloud/storage");
 const { bucketName } = require("./constants");
 
 const uploadFile = async (req, res) => {
-  const { body } = req;
+  const { body, method } = req;
+  if (method !== "POST") {
+    res.status(405).send();
+    return;
+  }
+  if (!body || JSON.stringify(body).length === 2) {
+    res.status(412).send();
+    return;
+  }
   res.set("Content-Type", "application/json");
   try {
     const date = new Date().toISOString();
