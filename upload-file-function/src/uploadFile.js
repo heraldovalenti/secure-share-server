@@ -13,6 +13,7 @@ const uploadFile = async (req, res) => {
     return;
   }
   res.set("Content-Type", "application/json");
+  res.set("Access-Control-Allow-Origin", "*");
   try {
     const date = new Date().toISOString();
     const destFileName = `docs/${date}.json`;
