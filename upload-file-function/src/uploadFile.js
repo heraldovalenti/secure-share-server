@@ -4,7 +4,8 @@ const { bucketName } = require("./constants");
 
 const uploadFile = async (req, res) => {
   const { body, method } = req;
-  if (method !== "POST") {
+  res.set("Access-Control-Allow-Origin", "*");
+  if (!["POST", "OPTIONS"].includes(method)) {
     res.status(405).send();
     return;
   }
@@ -13,7 +14,6 @@ const uploadFile = async (req, res) => {
     return;
   }
   res.set("Content-Type", "application/json");
-  res.set("Access-Control-Allow-Origin", "*");
   try {
     const date = new Date().toISOString();
     const destFileName = `docs/${date}.json`;
