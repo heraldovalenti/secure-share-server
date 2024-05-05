@@ -5,10 +5,8 @@ const { bucketName } = require("./constants");
 const uploadFile = async (req, res) => {
   const { body, method } = req;
   res.set("Access-Control-Allow-Origin", "*");
-  if (!["POST", "OPTIONS"].includes(method)) {
-    res.status(405).send();
-    return;
-  }
+  res.set("Access-Control-Allow-Methods", "GET");
+  res.set("Access-Control-Allow-Headers", "Authorization");
   if (!body || JSON.stringify(body).length === 2) {
     res.status(412).send();
     return;
