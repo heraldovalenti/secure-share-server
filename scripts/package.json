@@ -1,0 +1,16 @@
+{
+  "name": "secure-share-server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "generate-key-pair": "node generate-key-pair.js",
+    "enc": "node public-encrypt.js",
+    "dec": "node private-decrypt.js",
+    "dec-img": "env-cmd -f .env.local node decrypt-image.js"
+  },
+  "dependencies": {
+    "@google-cloud/storage": "^7.10.2",
+    "env-cmd": "^10.1.0"
+  }
+}

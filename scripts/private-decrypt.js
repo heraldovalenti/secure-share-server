@@ -25,7 +25,7 @@ const plainText = privateDecrypt(
   {
     key: privateKey,
     oaepHash: "sha256",
-    passphrase: "top secret",
+    passphrase,
   },
   cipherText
 );

@@ -27,3 +27,6 @@ yarn-error.log*
 credentials.json
 env.yaml
 .vscode/
+
+scripts/downloads
+scripts/decrypted
