@@ -1,0 +1,26 @@
+{
+  "name": "upload-file-function",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "env-cmd -f .env node src/app.js",
+    "test": "jest",
+    "deploy-prep": "rm -rf node_modules && yarn install --production",
+    "deploy": "gcloud functions deploy uploadFile --runtime=nodejs18 --trigger-http --allow-unauthenticated --entry-point=uploadFile --env-vars-file env.yaml"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heraldovalenti/upload-file-function.git"
+  },
+  "author": "Heraldo Valenti <heraldovalenti@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "@google-cloud/storage": "^7.10.2"
+  },
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "env-cmd": "^10.1.0",
+    "express": "^4.19.2"
+  }
+}
