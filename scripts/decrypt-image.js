@@ -3,7 +3,7 @@ const {
   privateDecrypt,
   createDecipheriv,
 } = require("node:crypto");
-const { readFileSync, writeFileSync } = require("node:fs");
+const { readFileSync, writeFileSync, existsSync } = require("node:fs");
 const { Storage } = require("@google-cloud/storage");
 
 const bucketName = process.env.BUCKET_NAME;
@@ -15,7 +15,10 @@ const downloadPath = `./downloads/${fileName}`;
 const bucketPath = `docs/${fileName}`;
 const decryptedPath = `./decrypted/${fileName.split(".json")[0]}.jpeg`;
 
-const action = async () => {
+const downloadIfNecessary = async () => {
+  if (existsSync(downloadPath)) {
+    return;
+  }
   const storage = new Storage();
   const options = {
     destination: downloadPath,
@@ -25,7 +28,10 @@ const action = async () => {
     .file(bucketPath)
     .download(options);
   console.log("download response: ", response);
+};
 
+const action = async () => {
+  downloadIfNecessary();
   const fileContent = readFileSync(downloadPath, "utf8");
   const jsonFile = JSON.parse(fileContent);
   const { cipherText, key, iv } = jsonFile.file;
